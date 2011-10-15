@@ -135,6 +135,8 @@ class LinkableBehavior extends ModelBehavior {
 						$options['table'] = $db->fullTableName($_Model, true);
 					}
 
+					//do not mess with fields if specified in $query
+					if (empty($query['fields'])) {
 					if (!empty($options['fields'])) {
 						if ($options['fields'] === true && !empty($association['fields'])) {
 							$options['fields'] = $db->fields($_Model, null, $association['fields']);
@@ -171,6 +173,7 @@ class LinkableBehavior extends ModelBehavior {
 						elseif($query['fields'] != 'COUNT(*) AS `count`') {
 							$query['fields'] = array_merge($db->fields($Model), $options['fields']);
 						}
+					}
 					}
 
 					$options[$this->_key] = am($options[$this->_key], array_diff_key($options, $optionsKeys));
