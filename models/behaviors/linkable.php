@@ -133,6 +133,9 @@ class LinkableBehavior extends ModelBehavior {
 
 					if (empty($options['table'])) {
 						$options['table'] = $db->fullTableName($_Model, true);
+
+						//so test cases can work
+						$options['table'] = $_Model->useTable;
 					}
 
 					//do not mess with fields if specified in $query
