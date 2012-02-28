@@ -56,6 +56,13 @@ class LinkableBehavior extends ModelBehavior {
 						$options = array();
 					}
 
+					if (!empty($options['conditions']['type'])) {
+						$defaults['type'] = $options['conditions']['type'];
+						unset($options['conditions']['type']);
+					} else {
+						$defaults['type'] = $this->_defaults['type'];
+					}
+
 					$options = am($defaults, compact('alias'), $options);
 
 					if (empty($options['alias'])) {
