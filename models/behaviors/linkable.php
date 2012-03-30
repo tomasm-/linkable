@@ -83,6 +83,12 @@ class LinkableBehavior extends ModelBehavior {
 					if (isset($Reference->belongsTo[$_Model->alias])) {
 						$type = 'hasOne';
 						$association = $Reference->belongsTo[$_Model->alias];
+					} else if (isset($Reference->hasOne[$_Model->alias])) {
+						$type = 'belongsTo';
+						$association = $Reference->hasOne[$_Model->alias];
+					} else if (isset($Reference->hasMany[$_Model->alias])) {
+						$type = 'belongsTo';
+						$association = $Reference->hasMany[$_Model->alias];
 					} else if (isset($associations[$Reference->alias])) {
 						$type = $associations[$Reference->alias];
 						$association = $_Model->{$type}[$Reference->alias];
